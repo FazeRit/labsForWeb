@@ -154,3 +154,11 @@ footer {
         max-height: 70vh;
     }
 }
+
+
+@media screen and (max-height: 900px) {
+    main{
+        max-height: 70vh;
+    }
+}
+
