@@ -26,7 +26,6 @@ header {
     padding-left: 5vw;
     height: 15vh;
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
     align-items: center;
 }
@@ -51,7 +50,7 @@ header {
     height: 10vh;
 }
 
-.menu__list > a {
+.menu__list > a     {
     text-decoration: none;
     color: #595757;
     width: 60px;
