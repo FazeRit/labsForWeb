@@ -93,13 +93,14 @@ footer {
     display: flex;
     width: 60vw;
     flex-grow: 1;
-    overflow-y: auto;
     justify-content: center;
     align-items: center;
-    background-image: url('./hedgehogHeader.svg');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
+}
+
+.main__content__image {
+    max-width: 50%;
+    height: 50%;
+    object-fit: contain;
 }
 
 .main__content__top > p {
@@ -141,9 +142,9 @@ footer {
         flex-wrap: wrap;
     }
 
-    .main__content__top {
-        padding: 5vh;
-        align-items: start;
+    .main__content__image {
+        max-width: 70%;
+        height: 70%;
     }
 
     header, footer {
