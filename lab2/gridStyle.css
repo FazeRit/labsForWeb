@@ -1,0 +1,149 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden; /* Заборона прокрутки */
+}
+
+body {
+    background-color: #5c5cc5;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: 1fr;
+    height: 100vh;
+    width: 100vw;
+}
+
+header {
+    background-color: #ffffff;
+    padding-right: 5vw;
+    padding-left: 5vw;
+    height: 13vh;
+    display: grid;
+    grid-template-columns: 30fr 1fr;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.main__title {
+    border: 0.2vh solid black;
+    color: #595757;
+    font-weight: bold;
+    font-size: 2.4vh;
+    display: flex;
+}
+
+.menu__list {
+    margin-top: 2vh;
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    justify-content: space-evenly;
+    color: white;
+    width: 30vw;
+    height: 10vh;
+}
+
+.menu__list > a {
+    text-decoration: none;
+    color: #595757;
+    width: 6vw;
+    height: 4vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu__list > a:hover {
+    color: #c55252;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1fr 3.2fr 1fr;
+    min-height: 1fr;
+}
+
+.aside__section {
+    background: #d57a1e;
+    max-height: 80vh;
+    overflow-y: auto;
+    display: grid;
+    align-content: start;
+}
+
+.aside__section__top {
+    background: yellow;
+    min-height: 15vh;
+    justify-content: center;
+    overflow-y: auto;
+}
+
+.main__content {
+    display: grid;
+    grid-template-rows: 6fr 1fr;
+    width: 100%;
+}
+
+.main__content__top {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.main__content__image {
+    max-width: 50%;
+    max-height: 50%;
+    object-fit: contain;
+    margin: auto;
+}
+
+.main__content__top > p {
+    width: 90%;
+}
+
+.main__content__bottom {
+    background: teal;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+footer {
+    background-color: #ffffff;
+    height: 13vh;
+    padding-right: 5vw;
+    padding-left: 5vw;
+    display: grid;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+@media screen and (max-width: 800px) {
+    .menu__list {
+        font-size: 2vh;
+        width: 80vw;
+        display: grid;
+        margin-top: 1vh;
+    }
+
+    main {
+        max-height: 70vh;
+    }
+
+    .main__content__image {
+        max-width: 40vw;
+        height: auto;
+    }
+}
+
+@media screen and (max-height: 900px) {
+    main {
+        max-height: 75vh;
+    }
+}

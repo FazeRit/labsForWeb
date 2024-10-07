@@ -1,0 +1,134 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    background-color: #5c5cc5;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+}
+
+header {
+    background-color: #ffffff;
+    padding-right: 5vw;
+    padding-left: 5vw;
+    height: 13vh;
+    line-height: 13vh;
+    text-align: center;
+    position: relative;
+}
+
+.main__title {
+    background-color: #ffffff;
+    font-weight: bold;
+    font-size: 2.4vh;
+    display: inline-block;
+    vertical-align: middle;
+    position: absolute;
+    right: 5vw;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.menu__list {
+    margin-top: 1vh;
+    width: 30vw;
+    display: inline-block;
+    vertical-align: middle;
+    position: absolute;
+    left: 5vw;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+@media screen and (max-width: 800px) {
+    .menu__list {
+        width: 50vw;
+        font-size: 2vh;
+    }
+}
+
+.menu__list > a {
+    text-decoration: none;
+    color: #595757;
+    display: inline-block;
+    line-height: 4vh;
+    margin: 0 1vw;
+}
+
+.menu__list > a:hover {
+    color: #c55252;
+}
+
+main {
+    width: 100%;
+    height: calc(100vh - 26vh);
+    overflow: hidden;
+    position: relative;
+}
+
+.aside__section {
+    background: #d57a1e;
+    height: 100%;
+    overflow-y: auto;
+    width: 20%;
+    float: left;
+}
+
+.aside__section__top {
+    background: yellow;
+    min-height: 15vh;
+    overflow-y: auto;
+}
+
+.main__content {
+    width: 60%;
+    float: left;
+    height: 100%;
+}
+
+.main__content__top {
+    text-align: center;
+    align-content: center;
+    height: 90%;
+}
+
+.main__content__image {
+    max-width: 50%;
+    max-height: 50%;
+    object-fit: contain;
+    display: inline-block;
+    margin: auto;
+}
+
+.main__content__top > p {
+    width: 90%;
+    margin: auto;
+}
+
+.main__content__bottom {
+    background: teal;
+    text-align: center;
+    line-height: 10vh;
+    height: 10vh;
+    color: white;
+}
+
+footer {
+    background-color: #ffffff;
+    height: 13vh;
+    padding-right: 5vw;
+    padding-left: 5vw;
+    text-align: right;
+    line-height: 13vh;
+    position: relative;
+}
