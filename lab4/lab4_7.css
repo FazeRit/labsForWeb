@@ -1,0 +1,422 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100vw;
+    font-family: 'Roboto', sans-serif;
+    background: #484399;
+    color: #e3e2eb;
+}
+
+footer {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 14vh;
+    width: 100vw;
+    background: #333333;
+    color: #EBE5E5; 
+}
+
+header {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    height: 5vh;
+    margin-top: 1vh;
+    padding-right: 20vw; 
+    padding-left: 20vw; 
+}
+
+.navbar__menu {
+    display: flex;
+    align-items: center;
+    gap: 0.6vw;
+}
+
+.navbar__menu svg {
+    cursor: pointer;
+    width: 1.4vw; 
+    height: 3vh; 
+    vertical-align: middle;
+}
+
+.burger__menu {
+    font-size: 4.5vh;
+    color: #ffffff;
+    margin-right: 2vw; 
+    cursor: pointer;
+}
+
+h1{
+    font-weight: lighter;
+    font-size: 1.6vw;
+    margin-top: 0.6vh;  
+}
+
+main{
+    display: flex;
+    flex-direction: flex;
+    height: 80vh;   
+    width: 100vw;
+    padding-right: 23vw; 
+    padding-left: 23vw; 
+    margin-top: 10vh;    
+}
+
+.main__title__container {
+    display: flex;
+    flex-direction: column;
+}
+
+.main__title {
+    color: #ffffff;
+    font-size: 3.6vw;
+    font-weight: bolder;
+}
+
+.vertical-line {
+    position: absolute;
+    left: 29.7%;
+    top: 8%;
+    width: 17.4vw; 
+    height: 80vh;
+    background-color: #2BCCC4; 
+    z-index: -1; 
+}
+
+.main__title__container > img {
+    width: 34vw;
+    height: 37vh;
+    margin-top: 1vh;
+}
+
+aside {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1vw;
+    margin-top: 4vh;
+    margin-left: 3vw;
+}
+
+.section {
+    color: #ffffff;
+    width: 14vw;
+    text-align: left;
+}
+
+.section h2 {
+    font-size: 1.1vw;
+    font-weight: bold;
+    color: #b5b4ca;
+    margin-bottom: 1.4vh;
+}
+
+.section p {
+    font-weight: 500;
+    font-size: 0.8vw;
+    margin-left: 2vw;
+    line-height: 2.5vh;
+    margin-bottom: 8px;
+}
+
+.section a {
+    font-weight: 500;
+    font-size: 0.8vw;
+    color: #ffffff;
+    margin-left: 2vw;
+    margin-top: 0.2vh;
+    text-decoration: underline;
+    cursor: pointer;    
+    text-underline-offset: 0.8vh;
+}
+
+.section:nth-child(2){
+    margin-top: 11vh;
+}
+
+@media screen and (max-width: 1400px) {
+    .main__title {
+        font-size: 4.6vw;
+    }
+
+    .main__title__container > img {
+        width: 44vw;
+        height: 36vh;
+    }
+
+    .vertical-line {
+        left: 23.7%;
+        top: 8%;
+        width: 21.8vw; 
+    }
+
+    main{
+        padding-right: 15vw; 
+        padding-left: 15vw; 
+        margin-top: 14vh;    
+    }
+
+    header {
+        padding-right: 12vw; 
+        padding-left: 12vw; 
+    }
+
+    .section:nth-child(2){
+        margin-top: 7vh;
+    }
+
+    .section{
+        width: 20vw;
+    }
+
+    .section a {
+        font-size: 1.4vw;
+        margin-left: 3vw;
+    }
+
+    .section p {
+        font-size: 1.2vw;
+        margin-left: 3vw;
+    }
+
+    .section h2 {
+        font-size: 1.6vw;
+    }
+
+    .section:nth-child(2){
+        margin-top: 9.4vh;
+    }
+
+    h1{
+        font-weight: lighter;
+        font-size: 2.4vw;
+        margin-top: 0.6vh;  
+    }    
+
+    .burger__menu {
+        font-size: 3vw;
+        color: #ffffff;
+        margin-right: 2vw; 
+        cursor: pointer;
+    }
+
+    .navbar__menu svg {
+        width: 2vw; 
+        height: 4vh; 
+        vertical-align: middle;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    main{
+        flex-direction: column;
+        align-items: center;
+        margin-top: 6vh;    
+    }
+
+    .vertical-line {
+        left: 37vw;
+        top: 6%;
+        height: 28vh;
+        width: 24vw; 
+    }
+
+    
+    .main__title {
+        text-align: center;
+        color: #ffffff;
+        font-size: 5vw;
+        font-weight: bolder;
+    }
+
+    .vertical-line {
+        left: 37vw;
+        top: 7%;
+        height: 48vh;
+        width: 24vw; 
+    }
+
+    aside {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 74vw;
+        justify-content: space-evenly;
+        margin-top: 6vh;
+        margin-left: 0vw;
+    }   
+
+    .main__title__container > img {
+        width: 74vw;
+        height: 34vh;
+    }
+
+    header {
+        padding-right: 10vw; 
+        padding-left: 10vw; 
+    }
+
+    h1{
+        font-weight: lighter;
+        font-size: 3vw;
+        margin-top: 1vh;  
+    }    
+
+    .burger__menu {
+        font-size: 4vw;
+        margin-right: 4vw; 
+    }
+
+    .navbar__menu svg {
+        width: 3vw; 
+        height: 4vh; 
+        vertical-align: middle;
+    }
+
+    .section {
+        color: #ffffff;
+        width: 30vw;
+        text-align: left;
+    }
+    
+    .section h2 {
+        font-size: 2.4vw;
+        font-weight: bold;
+        margin-bottom: 1.4vh;
+    }
+    
+    .section p {
+        font-weight: 500;
+        font-size: 1.6vw;
+        margin-left: 0;
+        line-height: 2.5vh;
+        margin-bottom: 16px;
+    }
+    
+    .section a {
+        font-weight: 500;
+        font-size: 1.6vw;
+        color: #ffffff;
+        margin-left: 0;
+        margin-top: 0;
+        text-decoration: underline;
+        cursor: pointer;    
+        text-underline-offset: 0.8vh;
+    }
+    
+    .section:nth-child(2){
+        margin-top: 0;
+    }
+
+}
+
+
+@media screen and (max-width: 600px) {
+    main{
+        flex-direction: column;
+        align-items: center;
+        padding-right: 10vw; 
+        padding-left: 10vw; 
+        margin-top: 4vh;  
+    }
+
+    .vertical-line {
+        left: 37vw;
+        top: 7%;
+        height: 60vw;
+        width: 24vw; 
+    }
+    
+    .main__title {
+        text-align: left;
+        color: #ffffff;
+        font-size: 32px;
+        font-weight: bolder;
+    }
+
+    aside {
+        padding-right: 3vw; 
+        padding-left: 3vw; 
+        margin-top: 8vh;
+        flex-direction: column;
+        align-items: baseline;
+    }
+    
+    .main__title__container > img {
+        margin-top: 1vh;
+        width: 70vw;
+        height: 36vw;
+    }
+
+    header {
+        padding-right: 12vw; 
+        padding-left: 12vw; 
+    }
+
+    h1{
+        font-weight: lighter;
+        font-size: 6vw;
+        margin-top: 0.6vh;  
+    }    
+
+    .burger__menu {
+        font-size: 8vw;
+        margin-right: 18vw;
+    }
+
+    .navbar__menu svg {
+        width: 5vw; 
+        height: 4vh; 
+        vertical-align: middle;
+    }
+    
+    .section{
+        width: 70vw;
+    }
+
+    .section h2 {
+        font-size: 4.6vw;
+        font-weight: bold;
+        margin-bottom: 1vh;
+    }
+    
+    .section p {
+        font-weight: 500;
+        font-size: 3.4vw;
+        margin-left: 0;
+        line-height: normal;
+        margin-bottom: 16px;
+    }
+    
+    .section a {
+        font-weight: 500;
+        font-size: 3.4vw;
+        color: #ffffff;
+        margin-left: 0;
+        margin-top: 0;
+        text-decoration: underline;
+        cursor: pointer;    
+        text-underline-offset: 0.8vh;
+    }
+    
+    .section:nth-child(2){
+        margin-top: 10vh;
+    }
+
+    footer {
+        height: 13vh;
+        font-size: 2.6vw;
+    }
+
+}
