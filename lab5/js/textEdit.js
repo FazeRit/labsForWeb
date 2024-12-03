@@ -15,11 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const selectedBlock = document.getElementById(blockId);
         if (!selectedBlock) return;
     
-        // Видалити існуючу форму, якщо вона є
         const existingForm = selectedBlock.querySelector('.edit-form');
         if (existingForm) existingForm.remove();
     
-        // Створити форму редагування
         const editForm = document.createElement('div');
         editForm.classList.add('edit-form');
         editForm.innerHTML = `
@@ -33,14 +31,12 @@ document.addEventListener('DOMContentLoaded', () => {
     
         selectedBlock.appendChild(editForm);
     
-        // Додати подію для кнопки "Зберегти"
         editForm.querySelector('#saveContent').addEventListener('click', () => {
             const newContent = editForm.querySelector('#editContent').value;
             selectedBlock.textContent = newContent;
             localStorage.setItem(`${storagePrefix}${blockId}`, newContent);
         });
     
-        // Додати подію для кнопки "Скинути"
         editForm.querySelector('#resetContent').addEventListener('click', () => {
             const original = originalContent[blockId];
             selectedBlock.textContent = original;
