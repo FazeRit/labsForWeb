@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Лабороторна робота номер 1</title>
+    <link rel="stylesheet" href="flexboxStyle.css">
+</head>
+<body>
+<!-- Header Section -->
+<!-- block 1 -->
+<header id="block1">
+    <nav class="menu__list">
+        <a href="flexbox.html">Flexbox</a>
+        <a href="gridFlexboxNima.html">-</a>
+        <a href="./grid.html">Grid</a>
+        <a href="./email.html">Email</a>
+    </nav>
+    <h2 class="main__title"> FLEXBOX </h2>
+</header>
+<!-- Main Section -->
+<main>
+    <!-- Left aside -->
+    <aside class="aside__section">
+        <!-- Left top aside section-->
+        <!-- block 2 -->
+        <div class="aside__section__top" id="block2">
+            1234 ipsum dolor sit amet, consectetur adipisicing elit. Eos excepturi labore modi natus, quae ut voluptatum. Aliquam beatae eaque eum illo molestias nostrum quae, quam reprehenderit, similique soluta tenetur voluptatem!
+        </div>
+        <!-- block 5 -->
+        <!-- Left bottom aside section-->
+        <div id="block5">
+            4321 ipsum dolor sit amet, consectetur adipisicing elit. Amet asperiores at consectetur consequatur cumque dolor eaque earum enim est ex facere, molestias mollitia nam nisi nobis, nostrum officia placeat provident quas quos sed sequi sint soluta sunt tempora velit voluptatibus? Asperiores commodi doloremque est laboriosam magnam molestiae nostrum оdit praesentium.
+        </div>
+    </aside>
+    <div class="main__content">
+        <!-- Main top section -->
+        <!-- block 3 -->
+        <div class="main__content__top" id="block3">
+            <img src="./hedgehogHeader.svg" alt="Hedgehog Header" class="main__content__image" usemap="#hedgehog-map" id="hedgehogImage">
+            <map name="hedgehog-map" id="hedgehogMap">
+                <area shape="rect" coords="0,0,300,300" href="https://uk.wikipedia.org/wiki/Їжак" alt="Wikipedia Hedgehog" id="hedgehogArea">
+            </map>  
+
+            <div id="formOval">
+                <label for="semiMajorAxis" id="labelSemiMajorAxis">Напівдовга вісь (a): </label>
+                <input type="number" id="semiMajorAxis" placeholder="Введіть значення a" required>
+                <br>
+                <label for="semiMinorAxis" id="labelSemiMinorAxis">Напівкоротка вісь (b): </label>
+                <input type="number" id="semiMinorAxis" placeholder="Введіть значення b" required>
+                <br>
+                <button id="calculateArea">Обчислити площу овала</button>
+                <p id="resultBlock"></p>
+            </div>
+            
+            <ol id="blockSelector">
+                <li data-block-id="block1">Блок 1</li>
+                <li data-block-id="block2">Блок 2</li>
+                <li data-block-id="block3">Блок 3</li>
+                <li data-block-id="block4">Блок 4</li>
+                <li data-block-id="block5">Блок 5</li>
+                <li data-block-id="block6">Блок 6</li>
+                <li data-block-id="block7">Блок 7</li>
+            </ol>
+
+        </div>     
+        <!-- block 6 -->
+        <!-- Main bottom section -->
+        <div class="main__content__bottom" id="block6">
+            <p>Page 1</p>
+        </div>
+    </div>
+    <aside class="aside__section">  
+        <!-- block 4 -->
+        <!-- Right aside section-->
+        <div id="block4">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet asperiores at consectetur consequatur cumque dolor eaque earum enim est ex facere, molestias mollitia nam nisi nobis, nostrum officia placeat provident quas quos sed sequi sint soluta sunt tempora velit voluptatibus? Asperiores commodi doloremque est laboriosam magnam molestiae.
+        </div>
+    </aside>
+</main>
+<!-- Footer Section -->
+<!-- block 7 -->
+<footer id="block7">
+    <h2 class="main__title"> FLEXBOX </h2>
+</footer>
+
+<!-- Link to external JavaScript files -->
+<script src="./js/swapBlock.js"></script>
+<script type="module" src="./js/oval.js"></script>
+<script src="./js/wordCount.js"></script>
+<script src="./js/textAlign.js"></script>
+<script src="./js/textEdit.js"></script>
+</body>
+</html>
