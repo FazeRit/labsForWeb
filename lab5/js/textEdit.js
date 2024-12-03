@@ -11,44 +11,40 @@ document.addEventListener('DOMContentLoaded', () => {
     blockSelector.addEventListener('click', (event) => {
         const blockId = event.target.dataset.blockId;
         if (!blockId) return;
-
+    
         const selectedBlock = document.getElementById(blockId);
         if (!selectedBlock) return;
-
+    
+        // Видалити існуючу форму, якщо вона є
+        const existingForm = selectedBlock.querySelector('.edit-form');
+        if (existingForm) existingForm.remove();
+    
+        // Створити форму редагування
         const editForm = document.createElement('div');
+        editForm.classList.add('edit-form');
         editForm.innerHTML = `
-            <textarea id="editContent" rows="5" style="width: 100%;">${selectedBlock.innerHTML}</textarea>
+            <textarea id="editContent" rows="5" style="width: 100%;">${selectedBlock.textContent}</textarea>
             <button id="saveContent">Зберегти</button>
             <button id="resetContent">Скинути</button>
         `;
         editForm.style.border = '1px solid #ccc';
         editForm.style.marginTop = '10px';
         editForm.style.padding = '10px';
-
-        const existingForm = selectedBlock.querySelector('div');
-        if (existingForm) existingForm.remove();
-
+    
         selectedBlock.appendChild(editForm);
-
-        document.getElementById('saveContent').addEventListener('click', () => {
-            const newContent = document.getElementById('editContent').value;
-            selectedBlock.innerHTML = newContent;
+    
+        // Додати подію для кнопки "Зберегти"
+        editForm.querySelector('#saveContent').addEventListener('click', () => {
+            const newContent = editForm.querySelector('#editContent').value;
+            selectedBlock.textContent = newContent;
             localStorage.setItem(`${storagePrefix}${blockId}`, newContent);
         });
-
-        document.getElementById('resetContent').addEventListener('click', () => {
+    
+        // Додати подію для кнопки "Скинути"
+        editForm.querySelector('#resetContent').addEventListener('click', () => {
             const original = originalContent[blockId];
-            selectedBlock.innerHTML = original;
-            selectedBlock.style.fontStyle = 'normal';
+            selectedBlock.textContent = original;
             localStorage.removeItem(`${storagePrefix}${blockId}`);
         });
     });
-
-    blocks.forEach(block => {
-        const savedContent = localStorage.getItem(`${storagePrefix}${block.id}`);
-        if (savedContent) {
-            block.innerHTML = savedContent;
-            block.style.fontStyle = 'italic';
-        }
-    });
-});
+});    
