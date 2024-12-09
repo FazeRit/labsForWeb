@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function fetchData() {
         try {
-            const response = await fetch('http://localhost:4001/api/');
+            const response = await fetch('https://lab6-b.vercel.app/api/');
             if (!response.ok) {
                 throw new Error(`Server error: ${response.status}`);
             }
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function deleteText(id) {
         try {
-            const response = await fetch(`http://localhost:4001/api/delete/${id}`, {
+            const response = await fetch(`https://lab6-b.vercel.app/api/delete/${id}`, {
                 method: 'DELETE',
             });
             if (!response.ok) {
