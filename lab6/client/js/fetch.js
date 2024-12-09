@@ -65,6 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const response = await fetch(`https://lab6-b.vercel.app/api/delete/${id}`, {
                 method: 'DELETE',
+                credentials: 'include'
             });
             if (!response.ok) {
                 throw new Error(`Failed to delete text with ID ${id}: ${response.status}`);
