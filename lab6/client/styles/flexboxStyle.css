@@ -319,7 +319,7 @@ footer {
 
 .glitch::before,
 .glitch::after {
-    content: attr(data-text); /* Дублюємо текст */
+    content: attr(data-text);
     position: absolute;
     top: 0;
     left: 0;
@@ -332,18 +332,17 @@ footer {
 }
 
 .glitch::before {
-    color: #ff0057; /* Рожевий текст */
+    color: #ff0057;
     animation: glitch-effect-1 2s infinite ease-in-out alternate;
     clip-path: polygon(0 2%, 100% 0, 100% 10%, 0 8%);
 }
 
 .glitch::after {
-    color: #00f0ff; /* Бірюзовий текст */
+    color: #00f0ff;
     animation: glitch-effect-2 2s infinite ease-in-out alternate-reverse;
     clip-path: polygon(0 10%, 100% 5%, 100% 15%, 0 12%);
 }
 
-/* Анімація основного тексту */
 @keyframes glitch-animation {
     0%, 100% {
         transform: translate(0);
@@ -362,7 +361,6 @@ footer {
     }
 }
 
-/* Анімація рожевого шару */
 @keyframes glitch-effect-1 {
     0% {
         transform: translate(0, 0);
@@ -378,7 +376,6 @@ footer {
     }
 }
 
-/* Анімація бірюзового шару */
 @keyframes glitch-effect-2 {
     0% {
         transform: translate(0, 0);

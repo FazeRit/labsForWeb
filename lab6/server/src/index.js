@@ -13,7 +13,6 @@ app.use(cors({
     origin: 'http://127.0.0.1:5500',
     methods: 'GET,POST,PUT,DELETE',
 }));
-// DATABASE_URL="postgres://avnadmin:AVNS_ahLCO_Wuho4bDmmxnYM@pg-15940cc0-denisgutzan-60e9.e.aivencloud.com:18384/defaultdb?sslmode=require"
 app.use('/api', router);    
 
 app.use(ErrorMiddleware);

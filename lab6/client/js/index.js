@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         try {
-            const response = await fetch('http://localhost:4001/api/add', {
+            const response = await fetch('https://lab6-b.vercel.app/api/add', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
