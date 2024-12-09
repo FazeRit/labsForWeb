@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function deleteText(id) {
         try {
-            const response = await fetch(`https://lab6-back-2s7ax83gf-fazerits-projects.vercel.app/delete/${id}`, {
+            const response = await fetch(`https://lab6-back-2s7ax83gf-fazerits-projects.vercel.app/api/delete/${id}`, {
                 method: 'DELETE',
                 credentials: 'include'
             });
