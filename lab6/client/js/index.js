@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         try {
-            const response = await fetch('https://lab6-back-60uupqktg-fazerits-projects.vercel.app/api/add', {
+            const response = await fetch('https://lab6-back-fol6xriac-fazerits-projects.vercel.app/api/add', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
