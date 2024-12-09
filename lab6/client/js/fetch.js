@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function fetchData() {
         try {
-            const response = await fetch('https://lab6-b.vercel.app/api/');
+            const response = await fetch('https://lab6-back-2s7ax83gf-fazerits-projects.vercel.app/api/');
             if (!response.ok) {
                 throw new Error(`Server error: ${response.status}`);
             }
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function deleteText(id) {
         try {
-            const response = await fetch(`https://lab6-b.vercel.app/api/delete/${id}`, {
+            const response = await fetch(`https://lab6-back-2s7ax83gf-fazerits-projects.vercel.app/delete/${id}`, {
                 method: 'DELETE',
                 credentials: 'include'
             });
