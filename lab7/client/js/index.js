@@ -233,10 +233,10 @@
                             <td>${event.message}</td>
                         </tr>
                     `).join('')}
-                    ${serverEvents.map((event) => `
+                    ${serverEvents.map((serverEvent) => `
                         <tr>
-                            <td>${serverEvents.eventTime}</td>
-                            <td>${serverEvents.message}</td>
+                            <td>${serverEvent.eventTime}</td>
+                            <td>${serverEvent.message}</td>
                         </tr>
                     `).join('')}
                 </table>
