@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let animationFrame;
         let positions = [];
         let directions = [];
-        let steps = [10, 10];
+        let steps = [1, 1];
         const MAX_STEP = 50;
 
         squares.forEach((square, index) => {
