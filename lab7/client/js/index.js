@@ -54,7 +54,7 @@
                 })
                 .catch(error => console.error('Error clearing events on server:', error));
 
-            eventLog = [];
+            eventLog = [];  
             contentTop.innerHTML = `
                 <div class="work" id="work">
                     <div class="controls">
@@ -192,12 +192,13 @@
             function logEvent(text, eventType = 'generic') {
                 const event = {
                     id: eventLog.length + 1,
-                    eventTime: new Date().toLocaleTimeString(), 
+                    eventTime: new Date(),
                     eventType: eventType,                  
                     message: text                          
                 };
                 eventLog.push(event);
             }
+            
         }
 
         function displayEvents() {
