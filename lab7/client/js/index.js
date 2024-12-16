@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function saveEventsToStorageAndServer() {
-        const BATCH_SIZE = 5; 
+        const BATCH_SIZE = 20; 
         const totalEvents = eventLog.length;
     
         if (totalEvents > 0) {
@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (response.ok) {
                         console.log(`Успішно відправлено пакет подій ${i + 1} - ${i + batch.length}`);
                     } else {
-                        console.error("Помилка при відправці пакету:", response.statusText);
+                        console.error("Помилка при відпр авці пакету:", response.statusText);
                     }
                 })
                 .catch(error => {
