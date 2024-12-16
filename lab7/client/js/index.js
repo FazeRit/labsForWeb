@@ -208,7 +208,6 @@
                 fetch('https://lab7-back.vercel.app/api/')
                     .then(response => response.json())
                     .then(serverEvents   => {
-                        console.log(serverEvents);
                         renderEventTable(events, serverEvents.data);
                     })
                     .catch(error => console.error('Error fetching events from server:', error));
@@ -217,7 +216,7 @@
 
         function renderEventTable(localEvents, serverEvents) {
             const block5 = document.getElementById("block5");
-        
+            console.log(serverEvents);
             block5.innerHTML = `
                 <h3>Event Log</h3>
                 <table style="width: 100%; border-collapse: collapse; margin: 20px 0; font-family: Arial, sans-serif;">
