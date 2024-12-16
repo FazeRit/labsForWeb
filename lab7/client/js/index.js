@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
             fetch('https://lab7-back.vercel.app/api/add', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
+                credentials: 'include',
                 body: JSON.stringify({ events: eventLog }),
             }).catch(error => console.error('Error saving events to server:', error));
         }
