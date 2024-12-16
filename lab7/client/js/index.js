@@ -2,18 +2,31 @@ document.addEventListener("DOMContentLoaded", () => {
     const playBtn = document.getElementById("playBtn");
     const contentTop = document.getElementById("contentTop");
     const initialContent = contentTop.innerHTML;
-    const EVENT_STORAGE_KEY = "animationEvents";
+    const EVENT_STORAGE_KEY = "animationEvents";    
+
+
+    function clearLocalStorage() {
+        localStorage.removeItem(EVENT_STORAGE_KEY);
+    }
 
     playBtn.addEventListener("click", () => {
         fetch('https://lab7-back-4qzgyvd9i-fazerits-projects.vercel.app/api/clear', { method: 'DELETE' })
-        .then(() => console.log('Events cleared on server'))
-        .catch(error => console.error('Error clearing events on server:', error));
+            .then(response => {
+                if (response.ok) {
+                    console.log('Events cleared on server');
+                    clearLocalStorage();
+                } else {
+                    console.error('Failed to clear events on server');
+                }
+            })
+            .catch(error => {
+                console.error('Error clearing events on server:', error);
+            });
     
-
         contentTop.innerHTML = `
             <div class="work" id="work">
                 <div class="controls">
-                    <p id="message"></p> <!-- Повідомлення для виведення -->
+                    <p id="message"></p>
                     <button id="closeBtn">Close</button>
                     <button id="startBtn">Start</button>
                 </div>
@@ -24,22 +37,19 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
         `;
         initializeWork();
-    });
+    });    
 
     function initializeWork() {
         const closeBtn = document.getElementById("closeBtn");
         const startBtn = document.getElementById("startBtn");
         const anim = document.getElementById("anim");
         const squares = document.querySelectorAll(".square");
-        const message = document.getElementById("message");
 
         let animationFrame;
         let positions = [];
         let directions = [];
         let steps = [10, 10];
-        const MAX_STEP = 100;
-
-        clearLocalStorage();
+        const MAX_STEP = 50;
 
         squares.forEach((square, index) => {
             positions.push({
@@ -165,59 +175,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
         function logEvent(text) {
             const events = JSON.parse(localStorage.getItem(EVENT_STORAGE_KEY)) || [];
+            
             const event = {
                 id: events.length + 1,
                 time: new Date().toLocaleTimeString(),
                 message: text,
             };
+            
             events.push(event);
             localStorage.setItem(EVENT_STORAGE_KEY, JSON.stringify(events));
-        
+
             fetch('https://lab7-back-4qzgyvd9i-fazerits-projects.vercel.app/api/add', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    eventTime: new Date(),
-                    eventType: 'AnimationEvent',
-                    message: text,
+                    events: events.map(event => ({
+                        eventTime: new Date(),
+                        eventType: 'AnimationEvent',
+                        message: event.message,
+                    })),
                 }),
-            }).catch(error => console.error('Error saving event to server:', error));
-        
+            })
+            .catch(error => console.error('Error saving events to server:', error));
+
             displayEvents();
-        }
-
-        function clearLocalStorage() {
-            localStorage.removeItem(EVENT_STORAGE_KEY);
-        }
-
-        function displayEvents() {
-            const events = JSON.parse(localStorage.getItem(EVENT_STORAGE_KEY)) || [];
-
-            fetch('https://lab7-back-4qzgyvd9i-fazerits-projects.vercel.app/api/') 
-                .then(response => response.json())
-                .then(serverEvents => {
-                    const block5 = document.getElementById("block5");
-                    block5.innerHTML = `
-                        <h3>Event Log</h3>
-                        <table>
-                            <tr>
-                                <th>№</th>
-                                <th>Час</th>
-                                <th>Подія (LocalStorage)</th>
-                                <th>Подія (Database)</th>
-                            </tr>
-                            ${events.map((event, index) => `
-                                <tr>
-                                    <td>${event.id}</td>
-                                    <td>${event.time}</td>
-                                    <td>${event.message}</td>
-                                    <td>${serverEvents[index] ? serverEvents[index].message : ''}</td>
-                                </tr>
-                            `).join('')}
-                        </table>
-                    `;
-                })
-                .catch(error => console.error('Error fetching events from server:', error));
         }
     }
 });
