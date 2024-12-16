@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
         `;
         initializeWork();
-    });    
+    });
 
     function initializeWork() {
         const closeBtn = document.getElementById("closeBtn");
@@ -183,15 +183,13 @@ document.addEventListener("DOMContentLoaded", () => {
             events.push(event);
             localStorage.setItem(EVENT_STORAGE_KEY, JSON.stringify(events));
 
-            fetch('https://lab7-back.vercel.app/api/add', {
+            // Send all events in one request
+            fetch('https://lab7-back.vercel.app/api/add-events', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    eventTime: new Date(),
-                    eventType: 'AnimationEvent',
-                    message: text,
-                }),
-            }).catch(error => console.error('Error saving event to server:', error));
+                body: JSON.stringify({ events: events }), // Send all events as one array
+            })
+            .catch(error => console.error('Error saving events to server:', error));
 
             displayEvents();
         }
