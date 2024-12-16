@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
             console.log("Збережено події локально:", eventLog);
     
             const transformedEvents = eventLog.map(event => ({
-                eventTime: new Date(`1970-01-01T${event.time}`).toISOString(),
+                eventTime: event.time,
                 eventType: "event",
                 message: event.message,
             }));
