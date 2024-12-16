@@ -10,17 +10,35 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function saveEventsToStorageAndServer() {
-        if (eventLog.length > 0) {
+        const BATCH_SIZE = 10; 
+        const totalEvents = eventLog.length;
+    
+        if (totalEvents > 0) {
             localStorage.setItem(EVENT_STORAGE_KEY, JSON.stringify(eventLog));
-            console.log(eventLog);
-            fetch('https://lab7-back.vercel.app/api/add', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                credentials: 'include',
-                body: JSON.stringify({ events: eventLog }),
-            }).catch(error => console.error('Error saving events to server:', error));
+            console.log("Збережено події локально:", eventLog);
+    
+            for (let i = 0; i < totalEvents; i += BATCH_SIZE) {
+                const batch = eventLog.slice(i, i + BATCH_SIZE);
+    
+                fetch('https://lab7-back.vercel.app/api/add', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify({ events: batch }),
+                })
+                .then(response => {
+                    if (response.ok) {
+                        console.log(`Успішно відправлено пакет подій ${i + 1} - ${i + batch.length}`);
+                    } else {
+                        console.error("Помилка при відправці пакету:", response.statusText);
+                    }
+                })
+                .catch(error => {
+                    console.error('Помилка відправки подій на сервер:', error);
+                });
+            }
         }
-    }
+    }    
 
     playBtn.addEventListener("click", () => {
         fetch('https://lab7-back.vercel.app/api/clear', { method: 'DELETE' })
