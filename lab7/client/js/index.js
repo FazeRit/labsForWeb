@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     playBtn.addEventListener("click", () => {
+        // Clear both the localStorage and the server when playBtn is clicked
         fetch('https://lab7-back.vercel.app/api/clear', { method: 'DELETE' })
             .then(response => {
                 if (response.ok) {
@@ -21,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
             .catch(error => {
                 console.error('Error clearing events on server:', error);
             });
-    
+
         contentTop.innerHTML = `
             <div class="work" id="work">
                 <div class="controls">
@@ -64,6 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         closeBtn.addEventListener("click", () => {
+            // Display events from both localStorage and database
             displayEvents();
             contentTop.innerHTML = initialContent;
         });
