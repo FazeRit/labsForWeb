@@ -23,10 +23,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 message: event.message,
             }));
     
-            // Send events in batches
             for (let i = 0; i < totalEvents; i += BATCH_SIZE) {
                 const batch = transformedEvents.slice(i, i + BATCH_SIZE);
     
+                console.log(batch);
                 fetch('https://lab7-back.vercel.app/api/add', {
                     method: 'POST',
                     headers: {
