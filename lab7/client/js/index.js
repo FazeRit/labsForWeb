@@ -208,6 +208,7 @@
                 fetch('https://lab7-back.vercel.app/api/')
                     .then(response => response.json())
                     .then(serverEvents => {
+                        console.log(serverEvents);
                         renderEventTable(events, serverEvents);
                     })
                     .catch(error => console.error('Error fetching events from server:', error));
@@ -221,16 +222,17 @@
                 <table>
                     <tr>
                         <th>№</th>
-                        <th>Час</th>
+                        <th>Час</th>    
                         <th>Подія (LocalStorage)</th>
                         <th>Подія (Database)</th>
                     </tr>
-                    ${localEvents.map((event, index) => `
+                    ${localEvents.map((event) => `
                         <tr>
                             <td>${event.id}</td>
                             <td>${event.eventTime}</td>
                             <td>${event.message}</td>
-                            <td>${serverEvents[index] ? serverEvents[index].message : ''}</td>
+                            <td>${serverEvents.eventTime}</td>
+                            <td>${serverEvents.message}</td>
                         </tr>
                     `).join('')}
                 </table>
