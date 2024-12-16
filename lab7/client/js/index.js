@@ -240,7 +240,7 @@
                         </tr>
                     </thead>
                     <tbody style="background-color: #f2f2f2;">
-                        ${combinedEvents.map(({ localEvent, serverEvent }, index) => `
+                        ${combinedEvents.map(({ localEvent, serverEvent }) => `
                             <tr style="border-bottom: 1px solid #ddd;">
                                 <td style="padding: 8px;">${localEvent ? localEvent.id : ''}</td>
                                 <td style="padding: 8px;">${localEvent ? new Date(localEvent.eventTime).toLocaleString() : ''}</td>
