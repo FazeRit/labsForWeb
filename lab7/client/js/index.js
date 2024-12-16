@@ -216,9 +216,19 @@
 
         function renderEventTable(localEvents, serverEvents) {
             const block5 = document.getElementById("block5");
-            console.log(serverEvents);
+            
+            // Zip the local and server events together
+            const maxLength = Math.max(localEvents.length, serverEvents.length);
+            const combinedEvents = [];
+        
+            for (let i = 0; i < maxLength; i++) {
+                combinedEvents.push({
+                    localEvent: localEvents[i] || null, // If localEvent is undefined, use null
+                    serverEvent: serverEvents[i] || null // If serverEvent is undefined, use null
+                });
+            }
+        
             block5.innerHTML = `
-                <h3>Event Log</h3>
                 <table style="width: 100%; border-collapse: collapse; margin: 20px 0; font-family: Arial, sans-serif;">
                     <thead style="background-color: #4CAF50; color: white;">
                         <tr>
@@ -230,29 +240,17 @@
                         </tr>
                     </thead>
                     <tbody style="background-color: #f2f2f2;">
-                        <!-- Render Local Events -->
-                        ${localEvents.map((event) => `
+                        ${combinedEvents.map(({ localEvent, serverEvent }, index) => `
                             <tr style="border-bottom: 1px solid #ddd;">
-                                <td style="padding: 8px;">${event.id}</td>
-                                <td style="padding: 8px;">${new Date(event.eventTime).toLocaleString()}</td>
-                                <td style="padding: 8px;">${event.message}</td>
-                                <td></td> <!-- Empty cell for Database Time -->
-                                <td></td> <!-- Empty cell for Database Message -->
-                            </tr>
-                        `).join('')}
-                
-                        <!-- Render Server Events -->
-                        ${serverEvents.map((serverEvent) => `
-                            <tr style="border-bottom: 1px solid #ddd;">
-                                <td></td> <!-- Empty cell for Local Storage ID -->
-                                <td></td> <!-- Empty cell for Local Storage Time -->
-                                <td></td> <!-- Empty cell for Local Storage Message -->
-                                <td style="padding: 8px;">${new Date(serverEvent.eventTime).toLocaleString()}</td>
-                                <td style="padding: 8px;">${serverEvent.message}</td>
+                                <td style="padding: 8px;">${localEvent ? localEvent.id : ''}</td>
+                                <td style="padding: 8px;">${localEvent ? new Date(localEvent.eventTime).toLocaleString() : ''}</td>
+                                <td style="padding: 8px;">${localEvent ? localEvent.message : ''}</td>
+                                <td style="padding: 8px;">${serverEvent ? new Date(serverEvent.eventTime).toLocaleString() : ''}</td>
+                                <td style="padding: 8px;">${serverEvent ? serverEvent.message : ''}</td>
                             </tr>
                         `).join('')}
                     </tbody>
                 </table>
             `;
-        }              
+        }             
     });
