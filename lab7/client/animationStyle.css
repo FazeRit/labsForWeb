@@ -1,0 +1,103 @@
+.play-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #28a745;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.work {
+    position: relative;
+    width: calc(70% + 100px);
+    height: calc(90% - 10px);
+    background-color: #ddd;
+    overflow: hidden;
+    border: 1px solid black;
+}
+
+.controls {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.anim {
+    position: absolute;
+    bottom: 0;
+    width: calc(100% - 10px);
+    height: calc(100% - 50px);
+    background-color: yellow;
+    border: 5px solid red;
+}
+
+.square {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    transition: transform 0.05s linear;
+}
+
+
+.red {
+    background-color: red;
+}
+
+.green {
+    background-color: green;
+}
+
+.hidden {
+    display: none;
+}
+
+.controls {
+    display: flex;
+    flex-direction: row; 
+    justify-content: space-evenly; 
+    align-items: center;
+    width: 80%;
+}
+
+#message {
+    flex-grow: 1;
+    text-align: left;
+    margin-right: 10px; 
+}
+
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 18px;
+    text-align: left;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.styled-table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+    font-weight: bold;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+    border: 1px solid #dddddd;
+}
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
