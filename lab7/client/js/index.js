@@ -192,7 +192,7 @@
             function logEvent(text, eventType = 'generic') {
                 const event = {
                     id: eventLog.length + 1,
-                    time: new Date().toLocaleTimeString(), 
+                    eventTime: new Date().toLocaleTimeString(), 
                     eventType: eventType,                  
                     message: text                          
                 };
