@@ -231,6 +231,10 @@
                             <td>${event.id}</td>
                             <td>${event.eventTime}</td>
                             <td>${event.message}</td>
+                        </tr>
+                    `).join('')}
+                    ${serverEvents.map((event) => `
+                        <tr>
                             <td>${serverEvents.eventTime}</td>
                             <td>${serverEvents.message}</td>
                         </tr>
