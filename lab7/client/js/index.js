@@ -204,12 +204,14 @@
         function displayEvents() {
             const events = JSON.parse(localStorage.getItem(EVENT_STORAGE_KEY)) || [];
 
-            fetch('https://lab7-back.vercel.app/api/')
-                .then(response => response.json())
-                .then(serverEvents => {
-                    renderEventTable(events, serverEvents);
-                })
-                .catch(error => console.error('Error fetching events from server:', error));
+            setTimeout(() => {
+                fetch('https://lab7-back.vercel.app/api/')
+                    .then(response => response.json())
+                    .then(serverEvents => {
+                        renderEventTable(events, serverEvents);
+                    })
+                    .catch(error => console.error('Error fetching events from server:', error));
+            }, 2000); 
         }
 
         function renderEventTable(localEvents, serverEvents) {
@@ -226,12 +228,12 @@
                     ${localEvents.map((event, index) => `
                         <tr>
                             <td>${event.id}</td>
-                            <td>${event.time}</td>
+                            <td>${event.eventTime}</td>
                             <td>${event.message}</td>
                             <td>${serverEvents[index] ? serverEvents[index].message : ''}</td>
                         </tr>
                     `).join('')}
                 </table>
             `;
-        }
+        }       
     });
