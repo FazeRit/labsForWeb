@@ -12,36 +12,44 @@ document.addEventListener("DOMContentLoaded", () => {
     function saveEventsToStorageAndServer() {
         const BATCH_SIZE = 20; 
         const totalEvents = eventLog.length;
-    
+        
         if (totalEvents > 0) {
             localStorage.setItem(EVENT_STORAGE_KEY, JSON.stringify(eventLog));
             console.log("Збережено події локально:", eventLog);
     
+            const transformedEvents = eventLog.map(event => ({
+                eventTime: new Date(`1970-01-01T${event.time}`).toISOString(),
+                eventType: "event",
+                message: event.message,
+            }));
+    
+            // Send events in batches
             for (let i = 0; i < totalEvents; i += BATCH_SIZE) {
-                const batch = eventLog.slice(i, i + BATCH_SIZE);
+                const batch = transformedEvents.slice(i, i + BATCH_SIZE);
     
                 fetch('https://lab7-back.vercel.app/api/add', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    credentials: 'include',
-                    body: JSON.stringify(batch),
+                    body: JSON.stringify({ events: batch }),
                 })
                 .then(response => {
                     if (response.ok) {
                         console.log(`Успішно відправлено пакет подій ${i + 1} - ${i + batch.length}`);
                     } else {
-                        console.error("Помилка при відпр авці пакету:", response.statusText);
+                        console.error(`Помилка при відправці пакету ${i + 1} - ${i + batch.length}:`, response.status, response.statusText);
                     }
                 })
                 .catch(error => {
-                    console.error('Помилка відправки подій на сервер:', error);
+                    console.error(`Помилка відправки пакету подій ${i + 1} - ${i + batch.length}:`, error);
                 });
             }
+        } else {
+            console.log("Жодної події для збереження немає.");
         }
-    }    
-
+    }
+    
     playBtn.addEventListener("click", () => {
         fetch('https://lab7-back.vercel.app/api/clear', { method: 'DELETE' })
             .then(response => {
