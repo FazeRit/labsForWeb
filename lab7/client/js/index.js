@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     playBtn.addEventListener("click", () => {
-        // Clear both the localStorage and the server when playBtn is clicked
         fetch('https://lab7-back.vercel.app/api/clear', { method: 'DELETE' })
             .then(response => {
                 if (response.ok) {
@@ -65,7 +64,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         closeBtn.addEventListener("click", () => {
-            // Display events from both localStorage and database
             displayEvents();
             contentTop.innerHTML = initialContent;
         });
@@ -183,15 +181,12 @@ document.addEventListener("DOMContentLoaded", () => {
             events.push(event);
             localStorage.setItem(EVENT_STORAGE_KEY, JSON.stringify(events));
 
-            // Send all events in one request
-            fetch('https://lab7-back.vercel.app/api/add-events', {
+            fetch('https://lab7-back.vercel.app/api/add', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ events: events }), // Send all events as one array
+                body: JSON.stringify({ events: events }),
             })
             .catch(error => console.error('Error saving events to server:', error));
-
-            displayEvents();
         }
 
         function displayEvents() {
