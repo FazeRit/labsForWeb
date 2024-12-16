@@ -22,9 +22,11 @@ document.addEventListener("DOMContentLoaded", () => {
     
                 fetch('https://lab7-back.vercel.app/api/add', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
                     credentials: 'include',
-                    body: JSON.stringify({ events: batch }),
+                    body: JSON.stringify(batch),
                 })
                 .then(response => {
                     if (response.ok) {
