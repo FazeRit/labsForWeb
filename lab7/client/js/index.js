@@ -207,9 +207,9 @@
             setTimeout(() => {
                 fetch('https://lab7-back.vercel.app/api/')
                     .then(response => response.json())
-                    .then(serverEvents => {
+                    .then(serverEvents   => {
                         console.log(serverEvents);
-                        renderEventTable(events, serverEvents);
+                        renderEventTable(events, serverEvents.data);
                     })
                     .catch(error => console.error('Error fetching events from server:', error));
             }, 5000); 
