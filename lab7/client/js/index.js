@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const EVENT_STORAGE_KEY = "animationEvents";
 
     playBtn.addEventListener("click", () => {
-        fetch('/api/clear', { method: 'DELETE' })
+        fetch('https://lab7-back-4qzgyvd9i-fazerits-projects.vercel.app/api/clear', { method: 'DELETE' })
         .then(() => console.log('Events cleared on server'))
         .catch(error => console.error('Error clearing events on server:', error));
     
@@ -173,7 +173,7 @@ document.addEventListener("DOMContentLoaded", () => {
             events.push(event);
             localStorage.setItem(EVENT_STORAGE_KEY, JSON.stringify(events));
         
-            fetch('/api/add', {
+            fetch('https://lab7-back-4qzgyvd9i-fazerits-projects.vercel.app/api/add', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -193,7 +193,7 @@ document.addEventListener("DOMContentLoaded", () => {
         function displayEvents() {
             const events = JSON.parse(localStorage.getItem(EVENT_STORAGE_KEY)) || [];
 
-            fetch('/api/get-events') 
+            fetch('https://lab7-back-4qzgyvd9i-fazerits-projects.vercel.app/api/') 
                 .then(response => response.json())
                 .then(serverEvents => {
                     const block5 = document.getElementById("block5");
