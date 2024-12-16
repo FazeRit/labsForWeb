@@ -211,7 +211,7 @@
                         renderEventTable(events, serverEvents);
                     })
                     .catch(error => console.error('Error fetching events from server:', error));
-            }, 2000); 
+            }, 5000); 
         }
 
         function renderEventTable(localEvents, serverEvents) {
