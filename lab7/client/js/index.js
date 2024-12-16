@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function saveEventsToStorageAndServer() {
-        const BATCH_SIZE = 10; 
+        const BATCH_SIZE = 5; 
         const totalEvents = eventLog.length;
     
         if (totalEvents > 0) {
