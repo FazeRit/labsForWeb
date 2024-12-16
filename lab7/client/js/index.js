@@ -4,7 +4,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const initialContent = contentTop.innerHTML;
     const EVENT_STORAGE_KEY = "animationEvents";    
 
-
     function clearLocalStorage() {
         localStorage.removeItem(EVENT_STORAGE_KEY);
     }
@@ -175,13 +174,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         function logEvent(text) {
             const events = JSON.parse(localStorage.getItem(EVENT_STORAGE_KEY)) || [];
-            
             const event = {
                 id: events.length + 1,
                 time: new Date().toLocaleTimeString(),
                 message: text,
             };
-            
             events.push(event);
             localStorage.setItem(EVENT_STORAGE_KEY, JSON.stringify(events));
 
@@ -189,16 +186,43 @@ document.addEventListener("DOMContentLoaded", () => {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    events: events.map(event => ({
-                        eventTime: new Date(),
-                        eventType: 'AnimationEvent',
-                        message: event.message,
-                    })),
+                    eventTime: new Date(),
+                    eventType: 'AnimationEvent',
+                    message: text,
                 }),
-            })
-            .catch(error => console.error('Error saving events to server:', error));
+            }).catch(error => console.error('Error saving event to server:', error));
 
             displayEvents();
+        }
+
+        function displayEvents() {
+            const events = JSON.parse(localStorage.getItem(EVENT_STORAGE_KEY)) || [];
+
+            fetch('https://lab7-back-4qzgyvd9i-fazerits-projects.vercel.app/api/')
+                .then(response => response.json())
+                .then(serverEvents => {
+                    const block5 = document.getElementById("block5");
+                    block5.innerHTML = `
+                        <h3>Event Log</h3>
+                        <table>
+                            <tr>
+                                <th>№</th>
+                                <th>Час</th>
+                                <th>Подія (LocalStorage)</th>
+                                <th>Подія (Database)</th>
+                            </tr>
+                            ${events.map((event, index) => `
+                                <tr>
+                                    <td>${event.id}</td>
+                                    <td>${event.time}</td>
+                                    <td>${event.message}</td>
+                                    <td>${serverEvents[index] ? serverEvents[index].message : ''}</td>
+                                </tr>
+                            `).join('')}
+                        </table>
+                    `;
+                })
+                .catch(error => console.error('Error fetching events from server:', error));
         }
     }
 });
