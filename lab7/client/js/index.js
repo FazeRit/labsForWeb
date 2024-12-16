@@ -220,37 +220,40 @@
         
             block5.innerHTML = `
                 <h3>Event Log</h3>
-                <table>
-                    <tr>
-                        <th>№</th>
-                        <th>Час (LocalStorage)</th>
-                        <th>Подія (LocalStorage)</th>
-                        <th>Час (Database)</th>
-                        <th>Подія (Database)</th>
-                    </tr>
-        
-                    <!-- Render Local Events -->
-                    ${localEvents.map((event) => `
+                <table style="width: 100%; border-collapse: collapse; margin: 20px 0; font-family: Arial, sans-serif;">
+                    <thead style="background-color: #4CAF50; color: white;">
                         <tr>
-                            <td>${event.id}</td>
-                            <td>${event.eventTime}</td>
-                            <td>${event.message}</td>
-                            <td></td> <!-- Empty cell for Database Time -->
-                            <td></td> <!-- Empty cell for Database Message -->
+                            <th style="padding: 10px; text-align: left;">№</th>
+                            <th style="padding: 10px; text-align: left;">Час (LocalStorage)</th>
+                            <th style="padding: 10px; text-align: left;">Подія (LocalStorage)</th>
+                            <th style="padding: 10px; text-align: left;">Час (Database)</th>
+                            <th style="padding: 10px; text-align: left;">Подія (Database)</th>
                         </tr>
-                    `).join('')}
-        
-                    <!-- Render Server Events -->
-                    ${serverEvents.map((serverEvent) => `
-                        <tr>
-                            <td></td> <!-- Empty cell for Local Storage ID -->
-                            <td></td> <!-- Empty cell for Local Storage Time -->
-                            <td></td> <!-- Empty cell for Local Storage Message -->
-                            <td>${serverEvent.eventTime}</td>
-                            <td>${serverEvent.message}</td>
-                        </tr>
-                    `).join('')}
+                    </thead>
+                    <tbody style="background-color: #f2f2f2;">
+                        <!-- Render Local Events -->
+                        ${localEvents.map((event) => `
+                            <tr style="border-bottom: 1px solid #ddd;">
+                                <td style="padding: 8px;">${event.id}</td>
+                                <td style="padding: 8px;">${new Date(event.eventTime).toLocaleString()}</td>
+                                <td style="padding: 8px;">${event.message}</td>
+                                <td></td> <!-- Empty cell for Database Time -->
+                                <td></td> <!-- Empty cell for Database Message -->
+                            </tr>
+                        `).join('')}
+                
+                        <!-- Render Server Events -->
+                        ${serverEvents.map((serverEvent) => `
+                            <tr style="border-bottom: 1px solid #ddd;">
+                                <td></td> <!-- Empty cell for Local Storage ID -->
+                                <td></td> <!-- Empty cell for Local Storage Time -->
+                                <td></td> <!-- Empty cell for Local Storage Message -->
+                                <td style="padding: 8px;">${new Date(serverEvent.eventTime).toLocaleString()}</td>
+                                <td style="padding: 8px;">${serverEvent.message}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
                 </table>
             `;
-        }        
+        }              
     });
