@@ -217,29 +217,40 @@
 
         function renderEventTable(localEvents, serverEvents) {
             const block5 = document.getElementById("block5");
+        
             block5.innerHTML = `
                 <h3>Event Log</h3>
                 <table>
                     <tr>
                         <th>№</th>
-                        <th>Час</th>    
+                        <th>Час (LocalStorage)</th>
                         <th>Подія (LocalStorage)</th>
+                        <th>Час (Database)</th>
                         <th>Подія (Database)</th>
                     </tr>
+        
+                    <!-- Render Local Events -->
                     ${localEvents.map((event) => `
                         <tr>
                             <td>${event.id}</td>
                             <td>${event.eventTime}</td>
                             <td>${event.message}</td>
+                            <td></td> <!-- Empty cell for Database Time -->
+                            <td></td> <!-- Empty cell for Database Message -->
                         </tr>
                     `).join('')}
+        
+                    <!-- Render Server Events -->
                     ${serverEvents.map((serverEvent) => `
                         <tr>
+                            <td></td> <!-- Empty cell for Local Storage ID -->
+                            <td></td> <!-- Empty cell for Local Storage Time -->
+                            <td></td> <!-- Empty cell for Local Storage Message -->
                             <td>${serverEvent.eventTime}</td>
                             <td>${serverEvent.message}</td>
                         </tr>
                     `).join('')}
                 </table>
             `;
-        }       
+        }        
     });
