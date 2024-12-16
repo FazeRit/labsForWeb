@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function saveEventsToStorageAndServer() {
         if (eventLog.length > 0) {
             localStorage.setItem(EVENT_STORAGE_KEY, JSON.stringify(eventLog));
+            console.log(eventLog);
             fetch('https://lab7-back.vercel.app/api/add', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -76,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         closeBtn.addEventListener("click", () => {
             saveEventsToStorageAndServer();
-            displayEvents(); // Показати події в блоці 5.
+            displayEvents();
             contentTop.innerHTML = initialContent;
         });
 
