@@ -113,7 +113,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
 
                 steps[index] = Math.min(steps[index] + 1, MAX_STEP);
-                logEvent(`Крок квадрата ${square.classList[1]}: ${steps[index]} px.`);
                 square.style.transform = `translate(${pos.x}px, ${pos.y}px)`;
             });
 
