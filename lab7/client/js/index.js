@@ -2,10 +2,22 @@ document.addEventListener("DOMContentLoaded", () => {
     const playBtn = document.getElementById("playBtn");
     const contentTop = document.getElementById("contentTop");
     const initialContent = contentTop.innerHTML;
-    const EVENT_STORAGE_KEY = "animationEvents";    
+    const EVENT_STORAGE_KEY = "animationEvents";
+    let eventLog = [];
 
     function clearLocalStorage() {
         localStorage.removeItem(EVENT_STORAGE_KEY);
+    }
+
+    function saveEventsToStorageAndServer() {
+        if (eventLog.length > 0) {
+            localStorage.setItem(EVENT_STORAGE_KEY, JSON.stringify(eventLog));
+            fetch('https://lab7-back.vercel.app/api/add', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ events: eventLog }),
+            }).catch(error => console.error('Error saving events to server:', error));
+        }
     }
 
     playBtn.addEventListener("click", () => {
@@ -18,10 +30,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     console.error('Failed to clear events on server');
                 }
             })
-            .catch(error => {
-                console.error('Error clearing events on server:', error);
-            });
+            .catch(error => console.error('Error clearing events on server:', error));
 
+        eventLog = [];
         contentTop.innerHTML = `
             <div class="work" id="work">
                 <div class="controls">
@@ -64,7 +75,8 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         closeBtn.addEventListener("click", () => {
-            displayEvents();
+            saveEventsToStorageAndServer();
+            displayEvents(); // Показати події в блоці 5.
             contentTop.innerHTML = initialContent;
         });
 
@@ -84,35 +96,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 const dir = directions[index];
                 let step = steps[index];
 
-                if (pos.x + dir.dx * step < 0) {
-                    const remaining = Math.abs(pos.x / dir.dx);
-                    pos.x = remaining;
+                if (pos.x + dir.dx * step < 0 || pos.x + dir.dx * step > anim.clientWidth - 10) {
                     dir.dx *= -1;
-                    logEvent(`Квадрат ${square.classList[1]} доторкнувся до лівої стінки.`);
-                } else if (pos.x + dir.dx * step > anim.clientWidth - 10) {
-                    const remaining = Math.abs((anim.clientWidth - 10 - pos.x) / dir.dx);
-                    pos.x = anim.clientWidth - 10 - remaining;
-                    dir.dx *= -1;
-                    logEvent(`Квадрат ${square.classList[1]} доторкнувся до правої стінки.`);
-                } else {
-                    pos.x += dir.dx * step;
+                    logEvent(`Квадрат ${square.classList[1]} доторкнувся до вертикальної стінки.`);
+                }
+                if (pos.y + dir.dy * step < 0 || pos.y + dir.dy * step > anim.clientHeight - 10) {
+                    dir.dy *= -1;
+                    logEvent(`Квадрат ${square.classList[1]} доторкнувся до горизонтальної стінки.`);
                 }
 
-                if (pos.y + dir.dy * step < 0) {
-                    const remaining = Math.abs(pos.y / dir.dy);
-                    pos.y = remaining;
-                    dir.dy *= -1;
-                    logEvent(`Квадрат ${square.classList[1]} доторкнувся до верхньої стінки.`);
-                } else if (pos.y + dir.dy * step > anim.clientHeight - 10) {
-                    const remaining = Math.abs((anim.clientHeight - 10 - pos.y) / dir.dy);
-                    pos.y = anim.clientHeight - 10 - remaining;
-                    dir.dy *= -1;
-                    logEvent(`Квадрат ${square.classList[1]} доторкнувся до нижньої стінки.`);
-                } else {
-                    pos.y += dir.dy * step;
-                }
-
+                pos.x += dir.dx * step;
+                pos.y += dir.dy * step;
                 steps[index] = Math.min(steps[index] + 1, MAX_STEP);
+
                 square.style.transform = `translate(${pos.x}px, ${pos.y}px)`;
             });
 
@@ -172,51 +168,46 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         function logEvent(text) {
-            const events = JSON.parse(localStorage.getItem(EVENT_STORAGE_KEY)) || [];
             const event = {
-                id: events.length + 1,
+                id: eventLog.length + 1,
                 time: new Date().toLocaleTimeString(),
                 message: text,
             };
-            events.push(event);
-            localStorage.setItem(EVENT_STORAGE_KEY, JSON.stringify(events));
+            eventLog.push(event);
+        }
+    }
 
-            fetch('https://lab7-back.vercel.app/api/add', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ events: events }),
+    function displayEvents() {
+        const events = JSON.parse(localStorage.getItem(EVENT_STORAGE_KEY)) || [];
+
+        fetch('https://lab7-back.vercel.app/api/')
+            .then(response => response.json())
+            .then(serverEvents => {
+                renderEventTable(events, serverEvents);
             })
-            .catch(error => console.error('Error saving events to server:', error));
-        }
+            .catch(error => console.error('Error fetching events from server:', error));
+    }
 
-        function displayEvents() {
-            const events = JSON.parse(localStorage.getItem(EVENT_STORAGE_KEY)) || [];
-
-            fetch('https://lab7-back.vercel.app/api/')
-                .then(response => response.json())
-                .then(serverEvents => {
-                    const block5 = document.getElementById("block5");
-                    block5.innerHTML = `
-                        <h3>Event Log</h3>
-                        <table>
-                            <tr>
-                                <th>№</th>
-                                <th>Час</th>
-                                <th>Подія (LocalStorage)</th>
-                                <th>Подія (Database)</th>
-                            </tr>
-                            ${events.map((event, index) => `
-                                <tr>
-                                    <td>${event.id}</td>
-                                    <td>${event.time}</td>
-                                    <td>${event.message}</td>
-                                    <td>${serverEvents[index] ? serverEvents[index].message : ''}</td>
-                                </tr>
-                            `).join('')}
-                        </table>
-                    `;
-                })
-                .catch(error => console.error('Error fetching events from server:', error));
-        }
+    function renderEventTable(localEvents, serverEvents) {
+        const block5 = document.getElementById("block5");
+        block5.innerHTML = `
+            <h3>Event Log</h3>
+            <table>
+                <tr>
+                    <th>№</th>
+                    <th>Час</th>
+                    <th>Подія (LocalStorage)</th>
+                    <th>Подія (Database)</th>
+                </tr>
+                ${localEvents.map((event, index) => `
+                    <tr>
+                        <td>${event.id}</td>
+                        <td>${event.time}</td>
+                        <td>${event.message}</td>
+                        <td>${serverEvents[index] ? serverEvents[index].message : ''}</td>
+                    </tr>
+                `).join('')}
+            </table>
+        `;
     }
 });
