@@ -189,11 +189,12 @@
                 );
             }
 
-            function logEvent(text) {
+            function logEvent(text, eventType = 'generic') {
                 const event = {
                     id: eventLog.length + 1,
-                    time: new Date().toLocaleTimeString(),
-                    message: text,
+                    time: new Date().toLocaleTimeString(), 
+                    eventType: eventType,                  
+                    message: text                          
                 };
                 eventLog.push(event);
             }
