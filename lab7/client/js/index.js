@@ -10,7 +10,7 @@
         }
 
         function saveEventsToStorageAndServer() {
-            const BATCH_SIZE = 20; 
+            const BATCH_SIZE = 50; 
             const totalEvents = eventLog.length;
         
             if (totalEvents > 0) {
